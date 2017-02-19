@@ -14,5 +14,5 @@
         android:padding="10dp"
         android:inputType="text|textMultiLine"
         android:background="@color/cast_expanded_controller_ad_label_background_color"
-        android:id="@+id/editText2" />
+        android:id="@+id/editTextMemo" />
 </LinearLayout>
