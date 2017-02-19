@@ -1,0 +1,31 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin10"
+    tools:context="com.example.maximecours.memotime.fragments.ListeFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ajouterunmemo"
+            android:textColor="@color/white"
+            android:id="@+id/ajoutermemo"
+            android:textSize="@dimen/textSize"
+            android:background="@drawable/button_add_memo" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/recyclerviewlistmemo"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ajoutermemo" />
+
+    </RelativeLayout>
+
+
+</FrameLayout>

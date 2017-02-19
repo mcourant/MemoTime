@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MemoTime</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ajouterunmemo">AJOUTER UN MEMO</string>
+    <string name="ok">OK</string>
+    <string name="supprimer">SUPPRIMER</string>
+    <string name="ajouter">Ajouter :</string>
+</resources>
