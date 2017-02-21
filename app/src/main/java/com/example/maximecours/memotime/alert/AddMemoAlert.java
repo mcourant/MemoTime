@@ -46,9 +46,10 @@ public class AddMemoAlert extends DialogFragment {
             }
         }
 
-        LayoutInflater inflater = getActivity().getLayoutInflater();
         DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
         db = databaseHelper.getReadableDatabase();
+
+        LayoutInflater inflater = getActivity().getLayoutInflater();
 
         View alertView = inflater.inflate(R.layout.alertdialogcustom, null, false);
         edittextMemo = (TextView) alertView.findViewById(R.id.editTextMemo);

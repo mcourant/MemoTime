@@ -92,7 +92,6 @@ public class ListeFragment extends Fragment implements View.OnClickListener, Rec
         if (getActivity() instanceof MainActivity) {
             AddMemoAlert addMemo = new AddMemoAlert();
             Bundle bundle = new Bundle();
-            bundle.putInt("codeDialogAdd",ADD_MEMO);
             addMemo.setArguments(bundle);
             addMemo.setTargetFragment(this,ADD_MEMO);
             addMemo.show(getActivity().getSupportFragmentManager(), "exemple");
@@ -112,7 +111,6 @@ public class ListeFragment extends Fragment implements View.OnClickListener, Rec
             mAdapter.notifyDataSetChanged();
         }else if(resultCode == DELETE_MEMO){
             int position = data.getIntExtra("position",0);
-            Toast.makeText(getContext(), "Position : "+position, Toast.LENGTH_SHORT).show();
             listeCourseDTOs.remove(position);
             mAdapter.notifyDataSetChanged();
         }

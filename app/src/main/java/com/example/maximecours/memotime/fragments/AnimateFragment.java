@@ -22,13 +22,11 @@ public class AnimateFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_animate, container, false);
     }
 
@@ -47,7 +45,7 @@ public class AnimateFragment extends Fragment {
             }
         });
 
-        Picasso.with(getContext()).load("http://www.shskanpur.com/img/notice.jpg").into(imageView);
+        Picasso.with(getContext()).load("http://cdn.ipernity.com/200/49/32/39814932.461ba68d.640.jpg").into(imageView);
 
     }
 

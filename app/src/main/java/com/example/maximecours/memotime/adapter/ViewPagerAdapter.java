@@ -18,7 +18,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     public ViewPagerAdapter(FragmentManager fragmentManager){
         super(fragmentManager);
-
     }
 
     @Override

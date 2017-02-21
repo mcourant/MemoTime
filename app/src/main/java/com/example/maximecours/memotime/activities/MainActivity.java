@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // création de la base de données, si inexistante :
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
         databaseHelper.getWritableDatabase();
 
