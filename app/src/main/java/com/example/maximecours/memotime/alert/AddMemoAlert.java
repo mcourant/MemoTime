@@ -32,13 +32,18 @@ public class AddMemoAlert extends DialogFragment {
     MemoDTO memo;
     SQLiteDatabase db;
     String memoName;
+    int position;
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         if (getArguments() != null) {
             memo = (MemoDTO) getArguments().getParcelableArrayList("memo");
-            memoName = memo.getName();
+            position = getArguments().getInt("position");
+            if(memo != null){
+                memoName = memo.getName();
+            }
         }
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -50,8 +55,7 @@ public class AddMemoAlert extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setMessage(R.string.ajouter)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -62,14 +66,23 @@ public class AddMemoAlert extends DialogFragment {
                             long id = db.insert(Base.MemosContrat.TABLE_MEMOS, null, values);
                             Toast.makeText(getContext(), "Valeur insérée :" + value, Toast.LENGTH_SHORT).show();
 
+                            Intent intent = new Intent();
+                            intent.putExtra("monMemoAdd",edittextMemo.getText().toString());
+                            getTargetFragment().onActivityResult(getTargetRequestCode(),100,intent);
+
                         } else if(memo != null) {
                             values.put(Base.MemosContrat.COLONNE_NAME, edittextMemo.getText().toString());
                             String selection = Base.MemosContrat.COLONNE_NAME + " = ? ";
                             String[] selectionArgs = {memoName};
                             int count = db.update(Base.MemosContrat.TABLE_MEMOS, values, selection, selectionArgs);
                             Toast.makeText(getContext(), "Valeur mise a jour :" + edittextMemo.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent();
+                            intent.putExtra("monMemoUpdate",edittextMemo.getText().toString());
+                            intent.putExtra("position",position);
+                            getTargetFragment().onActivityResult(getTargetRequestCode(),110,intent);
                         }else{
-                            Toast.makeText(getContext(), "Veuillez renseigner un mome pour le sauvegarder !", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Veuillez renseigner un memo pour le sauvegarder !", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -83,7 +96,8 @@ public class AddMemoAlert extends DialogFragment {
                 .setView(alertView);
 
         if(memo != null){
-            builder.setNegativeButton(R.string.supprimer, new DialogInterface.OnClickListener() {
+            builder.setMessage(R.string.modifier)
+                    .setNegativeButton(R.string.supprimer, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if(memo != null){
@@ -91,10 +105,17 @@ public class AddMemoAlert extends DialogFragment {
                         String[] selectionArgs = {memo.getName()};
                         db.delete(Base.MemosContrat.TABLE_MEMOS, selection, selectionArgs);
                         Toast.makeText(getContext(), "Valeur supprimée :" + memo.getName(), Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent();
+                        intent.putExtra("position",position);
+                        intent.putExtra("monMemoDelete",edittextMemo.getText().toString());
+                        getTargetFragment().onActivityResult(getTargetRequestCode(),120,intent);
                     }
                 }
             });
             edittextMemo.setText(memoName);
+        }else{
+            builder.setMessage(R.string.ajouter);
         }
 
 

@@ -6,7 +6,7 @@
     <dimen name="margin10">10dp</dimen>
     <dimen name="padding20">20dp</dimen>
     <dimen name="textSize">20sp</dimen>
-    <dimen name="widthImg">60dp</dimen>
+    <dimen name="widthImg">100dp</dimen>
     <dimen name="margin200">200dp</dimen>
     <dimen name="delty_y">200dp</dimen>
 </resources>

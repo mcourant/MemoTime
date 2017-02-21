@@ -6,13 +6,18 @@
     android:weightSum="1">
 
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:padding="10dp"
-        android:inputType="text|textMultiLine"
-        android:background="@color/cast_expanded_controller_ad_label_background_color"
-        android:id="@+id/editTextMemo" />
+        android:background="@color/gray">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextMemo"
+            android:background="@color/gray"
+            />
+    </LinearLayout>
 </LinearLayout>

@@ -38,6 +38,10 @@ public class ListeFragment extends Fragment implements View.OnClickListener, Rec
     RecyclerView.Adapter mAdapter;
     RecyclerView mRecyclerView;
 
+    public final static int ADD_MEMO = 100;
+    public final static int UPDATE_MEMO = 110;
+    public final static int DELETE_MEMO = 120;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +75,6 @@ public class ListeFragment extends Fragment implements View.OnClickListener, Rec
         mAdapter = new MemoAdapter(listeCourseDTOs);
         mRecyclerView.setAdapter(mAdapter);
 
-        mRecyclerView.addItemDecoration(new
-                DividerItemDecoration(getActivity(),
-                DividerItemDecoration.VERTICAL));
-
         mRecyclerView.addOnItemTouchListener(this);
 
 
@@ -91,11 +91,34 @@ public class ListeFragment extends Fragment implements View.OnClickListener, Rec
     public void onClick(View v) {
         if (getActivity() instanceof MainActivity) {
             AddMemoAlert addMemo = new AddMemoAlert();
+            Bundle bundle = new Bundle();
+            bundle.putInt("codeDialogAdd",ADD_MEMO);
+            addMemo.setArguments(bundle);
+            addMemo.setTargetFragment(this,ADD_MEMO);
             addMemo.show(getActivity().getSupportFragmentManager(), "exemple");
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        if(resultCode == ADD_MEMO){
+            listeCourseDTOs.add(new MemoDTO(data.getStringExtra("monMemoAdd")));
+            mAdapter.notifyDataSetChanged();
+        }else if(resultCode == UPDATE_MEMO){
+            int position = data.getIntExtra("position",0);
+            MemoDTO memoTmp = new MemoDTO(data.getStringExtra("monMemoUpdate"));
+            listeCourseDTOs.set(position,memoTmp);
+            mAdapter.notifyDataSetChanged();
+        }else if(resultCode == DELETE_MEMO){
+            int position = data.getIntExtra("position",0);
+            Toast.makeText(getContext(), "Position : "+position, Toast.LENGTH_SHORT).show();
+            listeCourseDTOs.remove(position);
+            mAdapter.notifyDataSetChanged();
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
@@ -107,7 +130,9 @@ public class ListeFragment extends Fragment implements View.OnClickListener, Rec
                 AddMemoAlert addMemo = new AddMemoAlert();
                 Bundle argument = new Bundle();
                 argument.putParcelableArrayList("memo", listeCourseDTOs.get(position));
+                argument.putInt("position",position);
                 addMemo.setArguments(argument);
+                addMemo.setTargetFragment(this,UPDATE_MEMO);
                 addMemo.show(getActivity().getSupportFragmentManager(), "exemple");
                 return true;
             }

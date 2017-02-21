@@ -3,12 +3,6 @@
     android:ordering="sequentially">
 
     <objectAnimator
-        android:duration="@integer/duree_animation_aller_rond_exemple"
-        android:propertyName="translationY"
-        android:valueFrom="@dimen/delty_y"
-        android:valueTo="0"/>
-
-    <objectAnimator
         android:duration="@integer/duree_animation_retour_rond_exemple"
         android:interpolator="@android:anim/bounce_interpolator"
         android:propertyName="translationY"
