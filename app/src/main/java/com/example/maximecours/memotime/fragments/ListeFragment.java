@@ -77,6 +77,9 @@ public class ListeFragment extends Fragment implements View.OnClickListener, Rec
 
         mRecyclerView.addOnItemTouchListener(this);
 
+        mRecyclerView.addItemDecoration(new
+                DividerItemDecoration(getActivity(),
+                DividerItemDecoration.VERTICAL));
 
         gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
